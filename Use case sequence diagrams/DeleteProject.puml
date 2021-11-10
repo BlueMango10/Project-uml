@@ -1,0 +1,33 @@
+@startuml DeleteProject
+actor ProjectOwner as PO
+boundary DeleteProjectButton as DPB
+control DeleteProjectControl as DPC
+boundary DeleteProjectForm as DPF
+database ProjectDatabase as PD
+
+PO -> DPB : press()
+activate DPB
+
+create DPC
+DPB --> DPC : <<create>>
+deactivate DPB
+activate DPC
+
+create DPF
+DPC --> DPF : <<create>>
+deactivate DPC
+
+PO -> DPF : fillContents()
+activate DPF
+deactivate DPF
+
+PO -> DPF : submit()
+activate DPF
+
+DPF -> DPC : submitForm()
+deactivate DPF
+activate DPC
+
+DPC -> PD : deleteProject()
+destroy DPC
+@enduml

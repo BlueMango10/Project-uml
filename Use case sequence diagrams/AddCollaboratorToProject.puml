@@ -1,0 +1,37 @@
+@startuml DeleteProject
+actor ProjectOwner as po
+boundary AddCollaboratorButton as acb
+control AddCollaboratorControl as acc
+boundary AddCollaboratorForm as acf
+entity Project as p
+
+po -> acb : press()
+activate acb
+
+create acc
+acb --> acc : <<create>>
+deactivate acb
+activate acc
+
+create acf
+acc --> acf : <<create>>
+deactivate acc
+
+po -> acf : fillContents()
+activate acf
+deactivate acf
+
+po -> acf : submit()
+activate acf
+deactivate acf
+
+acf -> acc : submitForm()
+activate acc
+
+acc -> p : addCollaborator()
+activate p
+deactivate p
+
+deactivate acc
+destroy acc
+@enduml
