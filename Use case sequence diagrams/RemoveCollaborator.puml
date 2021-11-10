@@ -1,0 +1,23 @@
+@startuml DeleteProject
+!theme plain
+actor ProjectOwner as po
+boundary RemoveCollaboratorButton as rcb
+control RemoveCollaboratorControl as rcc
+entity Project as p
+
+activate po
+
+po -> rcb : press()
+activate rcb
+
+create rcc
+rcb --> rcc : <<create>>
+deactivate rcb
+activate rcc
+
+rcc -> p : addCollaborator()
+deactivate rcc
+destroy rcc
+activate p
+deactivate p
+@enduml

@@ -1,4 +1,4 @@
-@startuml DeleteProject
+@startuml AddCollaborator
 !theme plain
 actor ProjectOwner as po
 boundary AddCollaboratorButton as acb

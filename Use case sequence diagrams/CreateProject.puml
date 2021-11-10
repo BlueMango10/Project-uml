@@ -18,10 +18,10 @@ activate CPC
 create CPF
 CPC --> CPF : <<create>>
 deactivate CPC
-PO --> CPF : fillContents()
+PO -> CPF : fillContents()
 activate CPF
 deactivate CPF
-PO --> CPF : submit()
+PO -> CPF : submit()
 activate CPF
 CPF -> CPC : submitForm()
 deactivate CPF
