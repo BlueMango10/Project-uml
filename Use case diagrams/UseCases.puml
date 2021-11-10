@@ -13,7 +13,7 @@
 
 po -r-|> pc
 
-nosg --> adsg #line.dashed : <<extend>>
+nosg -r-> adsg #line.dashed : <<extend>>
 
 po -l- crpj : <<initiate>>
 po -- dlpj : <<initiate>>
@@ -21,6 +21,6 @@ po -- adco : <<initiate>>
 po -- rmco : <<initiate>>
 
 pc -- adpa : <<initiate>>
-pc -- adsg : <<initiate>>
+pc -u- adsg : <<initiate>>
 pc -- rmpa : <<initiate>>
 @enduml
