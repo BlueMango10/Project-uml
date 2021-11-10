@@ -11,7 +11,7 @@
 :ProjectOwner: as po
 :ProjectCollaborator: as pc
 
-po <|-r- pc
+po -r-|> pc
 
 nosg --> adsg #line.dashed : <<extend>>
 

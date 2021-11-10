@@ -4,8 +4,8 @@ actor ProjectCollaborator as pc
 boundary AddPaperButton as apb
 control AddPaperControl as apc
 boundary AddPaperForm as apf
-database PaperDatabase as pd2
-database ProjectDatabase as pd
+database PaperDatabase as pd
+database ProjectDatabase as pd2
 
 activate pc
 
@@ -29,17 +29,16 @@ pc -> apf : submitContents()
 activate apf
 
 apf -> apc : submit()
-deactivate apf
+destroy apf
 activate apc
 
-apc -> pd2 : findPaper()
-activate pd2
-pd2 --> apc : paper
-deactivate pd2
-
-apc -> pd : addPaperToProject()
-deactivate apc
-destroy apc
+apc -> pd : findPaper()
 activate pd
+pd --> apc : paper
 deactivate pd
+
+apc -> pd2 : addPaperToProject()
+destroy apc
+activate pd2
+deactivate pd2
 @enduml

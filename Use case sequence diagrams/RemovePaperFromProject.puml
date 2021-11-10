@@ -1,0 +1,22 @@
+@startuml RemovePaperFromProject
+!theme plain
+actor ProjectOwner as po
+boundary RemovePaperButton as rpb
+control RemovePaperControl as rpc
+entity Project as p
+
+activate po
+
+po -> rpb : press()
+activate rpb
+
+create rpc
+rpb --> rpc : <<create>>
+deactivate rpb
+activate rpc
+
+rpc -> p : removePaper()
+destroy rpc
+activate p
+deactivate p
+@enduml

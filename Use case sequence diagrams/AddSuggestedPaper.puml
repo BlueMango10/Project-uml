@@ -1,0 +1,58 @@
+@startuml AddSuggestedPaper
+!theme plain
+actor ProjectCollaborator as pc
+boundary PaperView as pv
+control PaperSuggestionControl as psc
+boundary AddPaperSuggestion as aps
+boundary PaperPreview as pp
+database PaperDatabase as pd
+database ProjectDatabase as pd2
+
+activate pc
+
+pc -> pv : open()
+activate pv
+
+create psc
+pv --> psc : <<create>>
+activate psc
+deactivate pv
+
+psc -> pd : findRelatedPapers()
+activate pd
+pd --> psc : papers
+deactivate pd
+
+opt papers.Count > 0
+
+	create aps
+	psc --> aps : <<create>>
+	deactivate psc
+
+	pc -> aps : press()
+	activate aps
+
+	aps -> psc : addSuggestion()
+	destroy aps
+	activate psc
+
+	create pp
+	psc -> pp : <<create>>
+	deactivate psc
+
+	pc -> pp : confirm()
+	activate pp
+
+	pp -> psc : confirmAdd()
+	destroy pp
+	activate psc
+
+	psc -> pd2 : addPaperToProject()
+	deactivate psc
+	activate pd2
+
+end
+deactivate pd2
+
+destroy psc
+@enduml

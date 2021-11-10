@@ -1,36 +1,36 @@
 @startuml DeleteProject
 !theme plain
-actor ProjectOwner as PO
-boundary DeleteProjectButton as DPB
-control DeleteProjectControl as DPC
-boundary DeleteProjectForm as DPF
-database ProjectDatabase as PD
+actor ProjectOwner as po
+boundary DeleteProjectButton as dpb
+control DeleteProjectControl as dpc
+boundary DeleteProjectForm as dpf
+database ProjectDatabase as pd
 
-activate PO
+activate po
 
-PO -> DPB : press()
-activate DPB
+po -> dpb : press()
+activate dpb
 
-create DPC
-DPB --> DPC : <<create>>
-deactivate DPB
-activate DPC
+create dpc
+dpb --> dpc : <<create>>
+deactivate dpb
+activate dpc
 
-create DPF
-DPC --> DPF : <<create>>
-deactivate DPC
+create dpf
+dpc --> dpf : <<create>>
+deactivate dpc
 
-PO -> DPF : fillContents()
-activate DPF
-deactivate DPF
+po -> dpf : fillContents()
+activate dpf
+deactivate dpf
 
-PO -> DPF : submit()
-activate DPF
+po -> dpf : submit()
+activate dpf
 
-DPF -> DPC : submitForm()
-deactivate DPF
-activate DPC
+dpf -> dpc : submitForm()
+destroy dpf
+activate dpc
 
-DPC -> PD : deleteProject()
-destroy DPC
+dpc -> pd : deleteProject()
+destroy dpc
 @enduml

@@ -15,8 +15,7 @@ rcb --> rcc : <<create>>
 deactivate rcb
 activate rcc
 
-rcc -> p : addCollaborator()
-deactivate rcc
+rcc -> p : removeCollaborator()
 destroy rcc
 activate p
 deactivate p

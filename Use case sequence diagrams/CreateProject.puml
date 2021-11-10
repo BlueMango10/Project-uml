@@ -1,37 +1,44 @@
 @startuml CreateProject
 !theme plain
-actor ProjectOwner as PO
-boundary ControlProjectButton as CPB
-control CreateProjectControl as CPC
-boundary CreateProjectForm as CPF
-entity Project as P
-database ProjectDatabase as PD
+actor ProjectOwner as po
+boundary ControlProjectButton as cpb
+control CreateProjectControl as cpc
+boundary CreateProjectForm as cpf
+entity Project as p
+database ProjectDatabase as pd
 
-activate PO
+activate po
 
-PO -> CPB : press()
-activate CPB
-create CPC
-CPB --> CPC : <<create>>
-deactivate CPB
-activate CPC
-create CPF
-CPC --> CPF : <<create>>
-deactivate CPC
-PO -> CPF : fillContents()
-activate CPF
-deactivate CPF
-PO -> CPF : submit()
-activate CPF
-CPF -> CPC : submitForm()
-deactivate CPF
-destroy CPF
-activate CPC
-create P
-CPC --> P : <<create>>
-destroy CPC
-deactivate CPC
-activate P
-P -> PD : add()
-deactivate P
+po -> cpb : press()
+activate cpb
+
+create cpc
+cpb --> cpc : <<create>>
+deactivate cpb
+activate cpc
+
+create cpf
+cpc --> cpf : <<create>>
+deactivate cpc
+
+po -> cpf : fillContents()
+activate cpf
+deactivate cpf
+
+po -> cpf : submit()
+activate cpf
+
+cpf -> cpc : submitForm()
+destroy cpf
+activate cpc
+
+create p
+cpc --> p : <<create>>
+destroy cpc
+activate p
+
+p -> pd : add()
+deactivate p
+activate pd
+deactivate pd
 @enduml  

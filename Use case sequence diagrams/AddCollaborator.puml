@@ -28,12 +28,10 @@ po -> acf : submit()
 activate acf
 
 acf -> acc : submitForm()
-deactivate acf
 destroy acf
 activate acc
 
 acc -> p : addCollaborator()
-deactivate acc
 destroy acc
 activate p
 deactivate p
