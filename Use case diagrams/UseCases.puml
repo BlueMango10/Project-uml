@@ -1,0 +1,26 @@
+@startuml UseCases
+!theme plain
+(CreateProject) as crpj
+(DeleteProject) as dlpj
+(AddCollaborator) as adco
+(RemoveCollaborator) as rmco
+(AddPaperToProject) as adpa
+(AddSuggestedPaper) as adsg
+(NoSuggestedPapers) as nosg
+(RemovePaperFromProject) as rmpa
+:ProjectOwner: as po
+:ProjectCollaborator: as pc
+
+po <|-r- pc
+
+nosg --> adsg #line.dashed : <<extend>>
+
+po -l- crpj : <<initiate>>
+po -- dlpj : <<initiate>>
+po -- adco : <<initiate>>
+po -- rmco : <<initiate>>
+
+pc -- adpa : <<initiate>>
+pc -- adsg : <<initiate>>
+pc -- rmpa : <<initiate>>
+@enduml
