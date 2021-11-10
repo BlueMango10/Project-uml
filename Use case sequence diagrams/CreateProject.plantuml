@@ -1,0 +1,32 @@
+@startuml 
+actor ProjectOwner as PO
+boundary ControlProjectButton as CPB
+control CreateProjectControl as CPC
+boundary CreateProjectForm as CPF
+entity Project as P
+database ProjectDatabase as PD
+
+PO -> CPB : press()
+activate CPB
+create CPC
+CPB --> CPC : <<create>>
+deactivate CPB
+activate CPC
+create CPF
+CPC --> CPF : <<create>>
+deactivate CPC
+PO --> CPF : fillContents()
+activate CPF
+deactivate CPF
+PO --> CPF : submit()
+activate CPF
+CPF -> CPC : submitForm()
+deactivate CPF
+activate CPC
+create P
+CPC --> P : <<create>>
+deactivate CPC
+activate P
+P -> PD : add()
+deactivate P
+@enduml  
