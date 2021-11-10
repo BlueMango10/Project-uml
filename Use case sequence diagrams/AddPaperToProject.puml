@@ -1,4 +1,5 @@
 @startuml AddPaperToProject
+!theme plain
 actor ProjectCollaborator as pc
 boundary AddPaperButton as apb
 control AddPaperControl as apc
