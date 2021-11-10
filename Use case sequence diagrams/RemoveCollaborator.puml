@@ -1,4 +1,4 @@
-@startuml DeleteProject
+@startuml RemoveCollaborator
 !theme plain
 actor ProjectOwner as po
 boundary RemoveCollaboratorButton as rcb

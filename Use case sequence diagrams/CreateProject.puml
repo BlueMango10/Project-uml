@@ -25,9 +25,11 @@ PO -> CPF : submit()
 activate CPF
 CPF -> CPC : submitForm()
 deactivate CPF
+destroy CPF
 activate CPC
 create P
 CPC --> P : <<create>>
+destroy CPC
 deactivate CPC
 activate P
 P -> PD : add()

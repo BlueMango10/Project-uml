@@ -1,0 +1,44 @@
+@startuml AddPaperToProject
+actor ProjectCollaborator as pc
+boundary AddPaperButton as apb
+control AddPaperControl as apc
+boundary AddPaperForm as apf
+database PaperDatabase as pd2
+database ProjectDatabase as pd
+
+activate pc
+
+pc -> apb : press()
+activate apb
+
+create apc
+apb --> apc : <<create>>
+deactivate apb
+activate apc
+
+create apf
+apc --> apf : <<create>>
+deactivate apc
+
+pc -> apf : fillContents()
+activate apf
+deactivate apf
+
+pc -> apf : submitContents()
+activate apf
+
+apf -> apc : submit()
+deactivate apf
+activate apc
+
+apc -> pd2 : findPaper()
+activate pd2
+pd2 --> apc : paper
+deactivate pd2
+
+apc -> pd : addPaperToProject()
+deactivate apc
+destroy apc
+activate pd
+deactivate pd
+@enduml
