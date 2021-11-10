@@ -1,10 +1,13 @@
-@startuml 
+@startuml CreateProject
+!theme plain
 actor ProjectOwner as PO
 boundary ControlProjectButton as CPB
 control CreateProjectControl as CPC
 boundary CreateProjectForm as CPF
 entity Project as P
 database ProjectDatabase as PD
+
+activate PO
 
 PO -> CPB : press()
 activate CPB

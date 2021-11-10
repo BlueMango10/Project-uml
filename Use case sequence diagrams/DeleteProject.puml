@@ -1,9 +1,12 @@
 @startuml DeleteProject
+!theme plain
 actor ProjectOwner as PO
 boundary DeleteProjectButton as DPB
 control DeleteProjectControl as DPC
 boundary DeleteProjectForm as DPF
 database ProjectDatabase as PD
+
+activate PO
 
 PO -> DPB : press()
 activate DPB
