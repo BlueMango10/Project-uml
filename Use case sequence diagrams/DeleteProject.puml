@@ -33,4 +33,6 @@ activate dpc
 
 dpc -> pd : deleteProject()
 destroy dpc
+activate pd
+deactivate pd
 @enduml
