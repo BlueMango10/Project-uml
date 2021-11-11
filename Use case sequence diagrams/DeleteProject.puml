@@ -1,5 +1,6 @@
 @startuml DeleteProject
 !theme plain
+hide footbox
 actor ProjectOwner as po
 boundary DeleteProjectButton as dpb
 control DeleteProjectControl as dpc

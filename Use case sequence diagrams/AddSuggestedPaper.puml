@@ -1,5 +1,6 @@
 @startuml AddSuggestedPaper
 !theme plain
+hide footbox
 actor ProjectCollaborator as pc
 boundary PaperView as pv
 control PaperSuggestionControl as psc

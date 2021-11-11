@@ -1,5 +1,6 @@
 @startuml CreateProject
 !theme plain
+hide footbox
 actor ProjectOwner as po
 boundary ControlProjectButton as cpb
 control CreateProjectControl as cpc

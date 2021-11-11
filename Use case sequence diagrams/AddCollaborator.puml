@@ -1,5 +1,6 @@
 @startuml AddCollaborator
 !theme plain
+hide footbox
 actor ProjectOwner as po
 boundary AddCollaboratorButton as acb
 control AddCollaboratorControl as acc
