@@ -31,7 +31,7 @@ opt papers.Count > 0
 	
 	note right
 	An AddPaperSuggestion
-	is added for each
+	is created for each
 	related paper found
 	end note
 
