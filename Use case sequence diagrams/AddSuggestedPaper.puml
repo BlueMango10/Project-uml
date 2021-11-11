@@ -28,6 +28,12 @@ opt papers.Count > 0
 	create aps
 	psc --> aps : <<create>>
 	deactivate psc
+	
+	note right
+	An AddPaperSuggestion
+	is added for each
+	related paper found
+	end note
 
 	loop while ProjectCollaborator wants to add suggested papers
 
