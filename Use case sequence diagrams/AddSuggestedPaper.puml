@@ -29,28 +29,31 @@ opt papers.Count > 0
 	psc --> aps : <<create>>
 	deactivate psc
 
-	pc -> aps : press()
-	activate aps
+	loop while ProjectCollaborator wants to add suggested papers
 
-	aps -> psc : addSuggestion()
-	destroy aps
-	activate psc
+		pc -> aps : press()
+		activate aps
 
-	create pp
-	psc -> pp : <<create>>
-	deactivate psc
+		aps -> psc : addSuggestion()
+		destroy aps
+		activate psc
 
-	pc -> pp : confirm()
-	activate pp
+		create pp
+		psc -> pp : <<create>>
+		deactivate psc
 
-	pp -> psc : confirmAdd()
-	destroy pp
-	activate psc
+		pc -> pp : confirm()
+		activate pp
 
-	psc -> pd2 : addPaperToProject()
-	deactivate psc
-	activate pd2
+		pp -> psc : confirmAdd()
+		destroy pp
+		activate psc
 
+		psc -> pd2 : addPaperToProject()
+		deactivate psc
+		activate pd2
+
+	end
 end
 deactivate pd2
 
