@@ -41,7 +41,7 @@ opt papers.Count > 0
 		activate aps
 
 		aps -> psc : addSuggestion()
-		destroy aps
+		deactivate aps
 		activate psc
 
 		create pp
@@ -56,12 +56,15 @@ opt papers.Count > 0
 		activate psc
 
 		psc -> pd2 : addPaperToProject()
-		deactivate psc
 		activate pd2
+		deactivate pd2
+
+		psc -> aps : <<destroy>>
+		deactivate psc
+		destroy aps
 
 	end
 end
-deactivate pd2
 
 destroy psc
 @enduml
