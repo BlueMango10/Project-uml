@@ -1,9 +1,9 @@
 @startuml RemoveCollaborator
 !theme plain
 hide footbox
-actor ProjectOwner as po
+actor Owner as po
 boundary RemoveCollaboratorButton as rcb
-control RemoveCollaboratorControl as rcc
+control ProjectController as rcc
 entity Project as p
 
 activate po

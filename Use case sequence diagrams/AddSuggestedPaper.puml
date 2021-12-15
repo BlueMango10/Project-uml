@@ -1,13 +1,13 @@
 @startuml AddSuggestedPaper
 !theme plain
 hide footbox
-actor ProjectCollaborator as pc
+actor Collaborator as pc
 boundary PaperView as pv
-control PaperSuggestionControl as psc
+control PaperController as psc
 boundary AddPaperSuggestion as aps
 boundary PaperPreview as pp
-database PaperDatabase as pd
-database ProjectDatabase as pd2
+database Database as pd
+
 
 activate pc
 
@@ -56,9 +56,9 @@ opt papers.Count > 0
 		destroy pp
 		activate psc
 
-		psc -> pd2 : addPaperToProject()
-		activate pd2
-		deactivate pd2
+		psc -> pd : addPaperToProject()
+		activate pd
+		deactivate pd
 
 		psc -> aps : <<destroy>>
 		deactivate psc

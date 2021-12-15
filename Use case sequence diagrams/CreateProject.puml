@@ -1,12 +1,12 @@
 @startuml CreateProject
 !theme plain
 hide footbox
-actor ProjectOwner as po
-boundary ControlProjectButton as cpb
-control CreateProjectControl as cpc
+actor Owner as po
+boundary CreateProjectButton as cpb
+control ProjectController as cpc
 boundary CreateProjectForm as cpf
 entity Project as p
-database ProjectDatabase as pd
+database Database as pd
 
 activate po
 

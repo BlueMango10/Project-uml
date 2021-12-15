@@ -1,11 +1,11 @@
 @startuml DeleteProject
 !theme plain
 hide footbox
-actor ProjectOwner as po
+actor Owner as po
 boundary DeleteProjectButton as dpb
-control DeleteProjectControl as dpc
+control ProjectController as dpc
 boundary DeleteProjectForm as dpf
-database ProjectDatabase as pd
+database Database as pd
 
 activate po
 

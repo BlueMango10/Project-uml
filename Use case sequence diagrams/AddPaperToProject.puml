@@ -1,12 +1,11 @@
 @startuml AddPaperToProject
 !theme plain
 hide footbox
-actor ProjectCollaborator as pc
+actor Collaborator as pc
 boundary AddPaperButton as apb
 control AddPaperControl as apc
 boundary AddPaperForm as apf
-database PaperDatabase as pd
-database ProjectDatabase as pd2
+database Database as pd
 
 activate pc
 
@@ -38,8 +37,8 @@ activate pd
 pd --> apc : paper
 deactivate pd
 
-apc -> pd2 : addPaperToProject()
+apc -> pd : addPaperToProject()
 destroy apc
-activate pd2
-deactivate pd2
+activate pd
+deactivate pd
 @enduml

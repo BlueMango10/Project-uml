@@ -8,8 +8,8 @@
 (AddSuggestedPaper) as adsg
 (NoSuggestedPapers) as nosg
 (RemovePaperFromProject) as rmpa
-:ProjectOwner: as po
-:ProjectCollaborator: as pc
+:Owner: as po
+:Collaborator: as pc
 
 po -r-|> pc
 

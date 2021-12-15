@@ -1,9 +1,9 @@
 @startuml RemovePaperFromProject
 !theme plain
 hide footbox
-actor ProjectOwner as po
+actor Owner as po
 boundary RemovePaperButton as rpb
-control RemovePaperControl as rpc
+control ProjectController as rpc
 entity Project as p
 
 activate po
