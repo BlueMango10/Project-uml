@@ -42,7 +42,7 @@ opt papers.Count > 0
 	note right
 		A ChoosePaperButton is created for
 		each related paper, but only one
-		is used in theis use case.
+		is used in this use case.
 	end note
 
 	u -> cpb : press()
