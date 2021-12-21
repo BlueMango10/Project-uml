@@ -1,10 +1,10 @@
 @startuml RemoveCollaborator
 !theme plain
 hide footbox
-actor Owner as po
-boundary RemoveCollaboratorButton as rcb
-control ProjectController as rcc
-entity Project as p
+actor "User:Owner" as po
+boundary "RemoveCollaboratorButton" as rcb
+control "ProjectController" as rcc
+database "Database" as db
 
 activate po
 
@@ -12,12 +12,15 @@ po -> rcb : press()
 activate rcb
 
 create rcc
-rcb --> rcc : <<create>>
+rcb -->> rcc : <<create>>
+rcb ->> rcc : removeCollaborator()
 deactivate rcb
 activate rcc
 
-rcc -> p : removeCollaborator()
+rcc ->> db : removeCollaboratorFromProject()
+activate db
 destroy rcc
-activate p
-deactivate p
+deactivate db
+
+destroy rcb
 @enduml

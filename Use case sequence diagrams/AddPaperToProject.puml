@@ -1,12 +1,61 @@
 @startuml AddPaperToProject
 !theme plain
 hide footbox
-actor Collaborator as pc
-boundary AddPaperButton as apb
-control AddPaperControl as apc
-boundary AddPaperForm as apf
-database Database as pd
+actor "User:Collaborator" as u
+boundary "AddPaperButton:" as apb
+boundary "AddPaperForm:" as apf
+control "PaperController:" as apc
+boundary "ChoosePaperButton:" as cpb
+control "ProjectController:" as pc
+database "Database:" as pd
 
+activate u
+
+u -> apb : press()
+activate apb
+
+apb ->> apf : show()
+deactivate apb
+
+u -> apf : fillSearch()
+activate apf
+
+create apc
+apf -->> apc : <<create>>
+apf ->> apc : getPapersByName()
+activate apc
+
+
+apc ->> pd : getPapersByName()
+activate pd
+
+pd -->> apc : papers
+deactivate pd
+
+apc -->> apf : papers
+destroy apc
+
+create cpb
+apf -->> cpb : <<create>>
+deactivate apf
+
+u -> cpb : press()
+activate cpb
+
+create pc
+cpb -->> pc : <<create>>
+cpb -> pc : addPaper()
+deactivate cpb
+activate pc
+
+pc ->> pd : addPaperToProject()
+activate pd
+deactivate pd
+
+destroy pc
+destroy cpb
+
+/'
 activate pc
 
 pc -> apb : press()
@@ -41,4 +90,5 @@ apc -> pd : addPaperToProject()
 destroy apc
 activate pd
 deactivate pd
+'/
 @enduml

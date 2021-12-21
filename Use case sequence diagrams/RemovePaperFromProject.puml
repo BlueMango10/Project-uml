@@ -1,23 +1,63 @@
 @startuml RemovePaperFromProject
 !theme plain
 hide footbox
-actor Owner as po
-boundary RemovePaperButton as rpb
-control ProjectController as rpc
-entity Project as p
+actor "User:Collaborator" as u
+boundary "PaperViewButton:" as pvb
+boundary "PaperView:" as pv
+control "PaperController:" as pc
+boundary "RemovePaperButton" as rpb
+control "ProjectController" as prc
+database "Database:" as db
 
-activate po
+activate u
 
-po -> rpb : press()
+u -> pvb : press()
+activate pvb
+
+create pv
+pvb -->> pv : <<create>>
+deactivate pvb
+activate pv
+
+create pc
+pv -->> pc : <<create>>
+note right
+	Getting the paper details is not an
+	essential part of this use case, but
+	it does happen whenever the
+	paperview is opened.
+end note
+pv ->> pc : getPaperDetails()
+activate pc
+
+
+pc ->> db : getPaperDetails()
+activate db
+
+db -->> pc : paperDetails
+deactivate db
+
+pc -->> pv : paperDetails
+destroy pc
+
+create rpb
+pv -->> rpb : <<create>>
+deactivate pv
+
+u -> rpb : press()
 activate rpb
 
-create rpc
-rpb --> rpc : <<create>>
+create prc
+rpb -->> prc : <<create>>
+rpb ->> prc : removePaper()
 deactivate rpb
-activate rpc
+activate prc
 
-rpc -> p : removePaper()
-destroy rpc
-activate p
-deactivate p
+prc ->> db : removePaperFromProject()
+activate db
+deactivate db
+
+destroy prc
+destroy rpb
+destroy pv
 @enduml

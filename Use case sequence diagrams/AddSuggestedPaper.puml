@@ -1,6 +1,71 @@
 @startuml AddSuggestedPaper
 !theme plain
 hide footbox
+actor "User:Collaborator" as u
+boundary "AddPaperButton:" as apb
+boundary "SuggestedPaperList" as spl
+control "PaperDiscoveryController:" as pdc
+boundary "ChoosePaperButton:" as cpb
+control "ProjectController:" as pc
+database "Database:" as db
+
+activate u
+
+u -> apb : press()
+activate apb
+
+create spl
+apb -->> spl : <<create>>
+deactivate apb
+activate spl
+
+create pdc
+spl -->> pdc : <<create>>
+spl ->> pdc : getRelatedPapers()
+activate pdc
+
+pdc ->> db : getPapersRelatedToProject()
+activate db
+
+db -->> pdc : papers
+deactivate db
+
+pdc -->> spl : papers
+destroy pdc
+
+opt papers.Count > 0
+
+	create cpb
+	spl -->> cpb : <<create>>
+	deactivate spl
+
+	note right
+		A ChoosePaperButton is created for
+		each related paper, but only one
+		is used in theis use case.
+	end note
+
+	u -> cpb : press()
+	activate cpb
+
+	create pc
+	cpb -->> pc : <<create>>
+	cpb -> pc : addPaper()
+	deactivate cpb
+	activate pc
+
+	pc ->> db : addPaperToProject()
+	activate db
+	deactivate db
+	
+	destroy pc
+	destroy cpb
+
+end
+
+destroy spl
+
+/'
 actor Collaborator as pc
 boundary PaperView as pv
 control PaperController as psc
@@ -68,4 +133,5 @@ opt papers.Count > 0
 end
 
 destroy psc
+'/
 @enduml

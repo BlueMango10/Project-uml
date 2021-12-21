@@ -1,6 +1,35 @@
 @startuml DeleteProject
 !theme plain
 hide footbox
+
+actor "User: Owner" as po
+boundary "DeleteProjectForm:" as cpb
+control "ProjectController:" as cpc
+database "Database:" as pd
+entity "Project:" as p
+
+activate po
+
+po -> cpb : fillName()
+activate cpb
+deactivate cpb
+
+po -> cpb : confirm()
+activate cpb
+
+create cpc
+cpb -->> cpc : <<create>>
+deactivate cpb
+activate cpc
+
+cpc ->> pd : deleteProject()
+destroy cpc
+activate pd
+pd ->> p : destroy()
+destroy p
+deactivate pd
+
+/'
 actor Owner as po
 boundary DeleteProjectButton as dpb
 control ProjectController as dpc
@@ -36,4 +65,5 @@ dpc -> pd : deleteProject()
 destroy dpc
 activate pd
 deactivate pd
+'/
 @enduml

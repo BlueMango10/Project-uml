@@ -1,39 +1,100 @@
 @startuml AddCollaborator
 !theme plain
 hide footbox
-actor Owner as po
-boundary AddCollaboratorButton as acb
-control AddCollaboratorControl as acc
-boundary AddCollaboratorForm as acf
-entity Project as p
+actor "User:Owner" as po
+boundary "AddCollaboratorButton:" as acb
+boundary "AddCollaboratorForm:" as acf
+control "UserController:" as uc
+boundary "ChooseCollaboratorButton" as ccb
+control "ProjectController:" as acc
+'entity "Project:" as p
+database "Database:" as db
 
 activate po
 
 po -> acb : press()
 activate acb
 
+acb ->> acf : show()
+deactivate acb
+
+po -> acf : fillSearch()
+activate acf
+
+create uc
+acf -->> uc : <<create>>
+acf ->> uc : getUsersByName()
+activate uc
+
+uc ->> db : getUsersByName()
+activate db
+
+db -->> uc : users
+deactivate db
+
+uc -->> acf : users
+destroy uc
+
+create ccb
+acf -->> ccb : <<create>>
+deactivate acf
+
+po -> ccb : press()
+activate ccb
+
 create acc
-acb --> acc : <<create>>
+ccb -->> acc : <<create>>
+ccb ->> acc : addCollaborator()
+deactivate ccb
+activate acc
+
+acc ->> db : addCollaboratorToProject()
+activate db
+deactivate db
+
+destroy acc
+destroy ccb
+
+/'
+activate po
+
+po -> acb : press()
+activate acb
+
+create acc
+acb -->> acc : <<create>>
 deactivate acb
 activate acc
 
 create acf
-acc --> acf : <<create>>
+acc -->> acf : <<create>>
 deactivate acc
 
-po -> acf : fillContents()
+po -> acf : fillSearch()
 activate acf
+
+acf ->> acc : findUserByName()
+
+acc ->> db : findUserByName()
+activate db
+
+db -->> acf : userInfo[]
+deactivate db
+
+create ccb
+acf -->> ccb : <<create>>
 deactivate acf
 
-po -> acf : submit()
-activate acf
+po ->> ccb : press()
+activate ccb
 
-acf -> acc : submitForm()
-destroy acf
+ccb ->> acc : addCollaborator()
+destroy ccb
 activate acc
 
-acc -> p : addCollaborator()
+acc ->> p : addCollaborator()
 destroy acc
+destroy acf
 activate p
-deactivate p
+'/
 @enduml

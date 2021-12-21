@@ -1,45 +1,31 @@
 @startuml CreateProject
 !theme plain
 hide footbox
-actor Owner as po
-boundary CreateProjectButton as cpb
-control ProjectController as cpc
-boundary CreateProjectForm as cpf
-entity Project as p
-database Database as pd
+actor "User: Owner" as po
+boundary "CreateProjectForm:" as cpb
+control "ProjectController:" as cpc
+entity "Project:" as p
+database "Database:" as pd
 
 activate po
 
-po -> cpb : press()
+po -> cpb : fillName()
+activate cpb
+deactivate cpb
+
+po -> cpb : confirm()
 activate cpb
 
 create cpc
-cpb --> cpc : <<create>>
+cpb -->> cpc : <<create>>
 deactivate cpb
 activate cpc
 
-create cpf
-cpc --> cpf : <<create>>
-deactivate cpc
-
-po -> cpf : fillContents()
-activate cpf
-deactivate cpf
-
-po -> cpf : submit()
-activate cpf
-
-cpf -> cpc : submitForm()
-destroy cpf
-activate cpc
-
 create p
-cpc --> p : <<create>>
-destroy cpc
-activate p
+cpc -->> p : <<create>>
 
-p -> pd : add()
-deactivate p
+cpc ->> pd : addProject()
+destroy cpc
 activate pd
 deactivate pd
 @enduml  
